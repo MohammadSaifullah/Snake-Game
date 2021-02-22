@@ -1,0 +1,135 @@
+<html>
+
+<head>
+    <title>
+        Snake Game
+    </title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .outerBox {
+            width: 100%;
+            height: 100%;
+            background-image: url(https://wallpapercave.com/wp/wp2409705.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .innerBox {
+            background-color: navy;
+            height: 400px;
+            width: 800px;
+            margin-top: 200px;
+            margin: auto;
+            display: flex;
+            flex-direction: row-reverse;
+            align-content: center;
+            justify-content: center;
+            flex-grow: 1;
+            flex-shrink: 1;
+            border: 5px solid lightsteelblue;
+            background-image: url(https://wallpapercave.com/wp/wp3906260.jpg);
+            background-size: cover;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .snake {
+            background-color: linen;
+            height: 20px;
+            width: 20px;
+            position: absolute;
+        }
+
+        .food {
+            background-color: greenyellow;
+            height: 20px;
+            width: 20px;
+            border-radius: 100%;
+            position: relative;
+        }
+
+        .score {
+            font-weight: bolder;
+            display: flex;
+            flex-direction: row-reverse;
+            align-content: center;
+            justify-content: center;
+            height: 100px;
+            width: 200px;
+            background-position: center;
+            background-size: cover;
+            background-color: lawngreen;
+
+        }
+    </style>
+</head>
+
+<body onkeydown="move(event)">
+    <div class="outerBox">
+        <div class="innerBox">
+            <div class="snake"></div>
+            <div class="food"></div>
+        </div>
+        <div class="score">
+            <h2>score:</h3>
+        </div>
+    </div>
+    <script>
+        var snakes = null;
+        function element() {
+            snakes = document.querySelector(".snake");
+            snakes.style.position = "relative";
+            snakes.style.top = "20px";
+            snakes.style.left = "20px";
+            var foodie = document.querySelector(".food");
+            foodie.style.top = "30px";
+            foodie.style.left = "20px";
+            var score = 0;
+            setInterval(() => {
+                var op = snakes.offsetTop;
+                var ip = snakes.offsetLeft;
+                var fd = foodie.offsetTop;
+                var lft = foodie.offsetLeft;
+                if (fd == op && ip == lft) {
+                    score++;
+                    var scrbx = document.querySelector(".score");
+                    scrbx.innerHTML = score;
+                }
+                if (op < 1 || ip < 1) {
+                    alert("Game over");
+                }
+            }, 1000);
+        }
+        function move(e) {
+            var movement = e.which || e.keyCode;
+            switch (movement) {
+                case 37: moveLeft();
+                    break;
+                case 38: moveUp();
+                    break;
+                case 39: moveRight();
+                    break;
+                case 40: moveDown();
+                default: console.log(e);
+            }
+            function moveLeft() {
+                snakes.style.left = parseInt(snakes.style.left) - 5 + "px";
+            }
+            function moveUp() {
+                snakes.style.top = parseInt(snakes.style.top) - 5 + "px";
+            }
+            function moveRight() {
+                snakes.style.left = parseInt(snakes.style.left) + 5 + "px";
+            }
+            function moveDown() {
+                snakes.style.top = parseInt(snakes.style.top) + 5 + "px";
+            }
+        }
+        onload = element;
+    </script>
+</body>
+
+</html>
