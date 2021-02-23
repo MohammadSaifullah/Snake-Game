@@ -23,31 +23,27 @@
             width: 800px;
             margin-top: 200px;
             margin: auto;
-            display: flex;
-            flex-direction: row-reverse;
-            align-content: center;
-            justify-content: center;
-            flex-grow: 1;
-            flex-shrink: 1;
+
             border: 5px solid lightsteelblue;
-            background-image: url(https://wallpapercave.com/wp/wp3906260.jpg);
+            background-image: url(https://wallpaperaccess.com/full/4434760.jpg);
             background-size: cover;
             position: relative;
-            overflow: hidden;
+            overflow: visible;
         }
 
         .snake {
-            height: 20px;
-            width: 20px;
+            height: 40px;
+            width: 40px;
             position: absolute;
+            z-index: 1;
         }
 
         .food {
-            
+
             height: 20px;
             width: 20px;
             border-radius: 100%;
-            position: relative;
+            position: absolute;
         }
 
         .score {
@@ -69,9 +65,7 @@
     <div class="outerBox">
         <div class="innerBox">
             <div class="snake">🐍</div>
-            <div class="food">
-                🥚
-            </div>
+            <div class="food">🥚</div>
         </div>
         <div class="score">
             <h2>score:</h3>
@@ -80,13 +74,11 @@
     <script>
         var snakes = null;
         function element() {
-            snakes = document.querySelector(".snake");
+           var snakes = document.querySelector(".snake");
             snakes.style.position = "relative";
-            snakes.style.top = "20px";
+            snakes.style.top = "10px";
             snakes.style.left = "20px";
             var foodie = document.querySelector(".food");
-            foodie.style.top = "30px";
-            foodie.style.left = "20px";
             var score = 0;
             setInterval(() => {
                 var op = snakes.offsetTop;
@@ -97,9 +89,11 @@
                     score++;
                     var scrbx = document.querySelector(".score");
                     scrbx.innerHTML = score;
+                    rand();
                 }
-                if (op < 1 || ip < 1) {
+                if (op < 0 || ip < 0 || ip > 780 || op > 365) {
                     refreshPage();
+
                 }
             }, 35);
         }
@@ -108,7 +102,7 @@
                 if (el !== document.activeElement) {
                     document.location.reload();
                 }
-            }, 100)
+            }, 100);
         }
         function move(e) {
             var movement = e.which || e.keyCode;
@@ -123,19 +117,33 @@
                 default: console.log(e);
             }
             function moveLeft() {
-                snakes.style.left = parseInt(snakes.style.left) - 5 + "px";
+                snakes.style.left = parseInt(snakes.style.left) - 1 + "px";
             }
             function moveUp() {
-                snakes.style.top = parseInt(snakes.style.top) - 5 + "px";
+                snakes.style.top = parseInt(snakes.style.top) - 1 + "px";
             }
             function moveRight() {
-                snakes.style.left = parseInt(snakes.style.left) + 5 + "px";
+                snakes.style.left = parseInt(snakes.style.left) + 1 + "px";
             }
             function moveDown() {
-                snakes.style.top = parseInt(snakes.style.top) + 5 + "px";
+                snakes.style.top = parseInt(snakes.style.top) + 1 + "px";
             }
         }
-        onload = element;
+        onload = function () {
+            element();
+            rand();
+        }
+        function rand() {
+            var foodie = document.querySelector(".food");
+            var el = document.querySelector(".innerBox");
+            randomTop = getRandomNumber(0, 350);
+            randomLeft = getRandomNumber(0, 700);
+            foodie.style.top = randomTop + "px";
+            foodie.style.left = randomLeft + "px";
+            function getRandomNumber(min, max) {
+                return Math.round( Math.random() * (max - min) + min);
+            }
+        }
     </script>
 </body>
 
