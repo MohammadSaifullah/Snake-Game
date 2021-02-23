@@ -84,7 +84,9 @@
                 var ip = snakes.offsetLeft;
                 var fd = foodie.offsetTop;
                 var lft = foodie.offsetLeft;
-                if (fd == op && ip == lft) {
+                var topDiff = op - fd;
+                var leftDiff = ip - lft;
+                if (topDiff> -10 && topDiff< 10 && leftDiff >-10 && leftDiff < 10) {
                     score++;
                     var scrbx = document.querySelector(".score");
                     scrbx.innerHTML = score;
@@ -117,16 +119,16 @@
                 default: console.log(e);
             }
             function moveLeft() {
-                snakes.style.left = parseInt(snakes.style.left) - 1 + "px";
+                snakes.style.left = parseInt(snakes.style.left) - 5 + "px";
             }
             function moveUp() {
-                snakes.style.top = parseInt(snakes.style.top) - 1 + "px";
+                snakes.style.top = parseInt(snakes.style.top) - 5 + "px";
             }
             function moveRight() {
-                snakes.style.left = parseInt(snakes.style.left) + 1 + "px";
+                snakes.style.left = parseInt(snakes.style.left) + 5 + "px";
             }
             function moveDown() {
-                snakes.style.top = parseInt(snakes.style.top) + 1 + "px";
+                snakes.style.top = parseInt(snakes.style.top) + 5 + "px";
             }
         }
         onload = function () {
