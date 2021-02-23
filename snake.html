@@ -74,8 +74,7 @@
     <script>
         var snakes = null;
         function element() {
-           var snakes = document.querySelector(".snake");
-            snakes.style.position = "relative";
+            snakes = document.querySelector(".snake");
             snakes.style.top = "10px";
             snakes.style.left = "20px";
             var foodie = document.querySelector(".food");
@@ -114,6 +113,7 @@
                 case 39: moveRight();
                     break;
                 case 40: moveDown();
+                break;
                 default: console.log(e);
             }
             function moveLeft() {
